@@ -17,8 +17,14 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
-      - name: Verify static output
+      - run: npm run build:sharepoint
+      - name: Verify SharePoint single-file output
         run: |
           test -f out/index.html
-          test -d out/_next
-          test -n "$(find out/_next -type f | head -1)"
+          test -f out/RepoShelf.html
+          test -s out/RepoShelf.html
+          if grep -Eiq '<link[^>]+rel=["'\''"]stylesheet["'\'']|<script[^>]+src=|@font-face' out/RepoShelf.html; then
+            echo "External CSS, JS, or font references remain in RepoShelf.html"
+            exit 1
+          fi
+          echo "SharePoint single-file build is self-contained."
