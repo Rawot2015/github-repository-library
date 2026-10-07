@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:sharepoint": "node scripts/build-sharepoint-single-file.mjs"
   },
   "dependencies": {
     "jspdf": "^4.2.1",
