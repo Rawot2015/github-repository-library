@@ -23,7 +23,7 @@ jobs:
           test -f out/index.html
           test -f out/RepoShelf.html
           test -s out/RepoShelf.html
-          if grep -Eiq '<link[^>]+rel=["'\''"]stylesheet["'\'']|<script[^>]+src=|@font-face' out/RepoShelf.html; then
+          if grep -E '<link[^>]+rel="stylesheet"|<script[^>]+src=|@font-face' out/RepoShelf.html; then
             echo "External CSS, JS, or font references remain in RepoShelf.html"
             exit 1
           fi
